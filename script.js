@@ -86,7 +86,12 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
   window.matchMedia('(min-width: 761px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
 
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  const dock = document.querySelector('[data-dock]');
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+    // quick-action dock appears once the hero buttons are scrolled away
+    if (dock) dock.classList.toggle('show', window.scrollY > 520);
+  };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -151,7 +156,7 @@
 
   /* ---------- Hero parallax ---------- */
   const parallax = [...document.querySelectorAll('[data-parallax]')];
-  if (!reduceMotion && parallax.length) {
+  if (!reduceMotion && parallax.length && window.matchMedia('(min-width: 961px)').matches) {
     let ticking = false;
     const move = () => {
       const y = window.scrollY;

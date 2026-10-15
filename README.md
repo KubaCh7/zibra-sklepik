@@ -10,3 +10,8 @@ Na Vercel wystarczy zaimportować repozytorium (framework: „Other”).
 - `style.css` — wygląd (materiał szkła: klasa `.glass`)
 - `script.js` — status „otwarte/zamknięte” na żywo, animacje przy przewijaniu, menu mobilne
 - `assets/` — logo i zdjęcia produktów
+
+## Zmiana aktualnej oferty
+
+Sekcja „Teraz u nas” jest w `index.html` (szukaj komentarza „Aktualna oferta”).
+Wystarczy podmienić teksty: „Zapraszamy na pyszne”, „śledzie”, „i ryby wędzone”.
