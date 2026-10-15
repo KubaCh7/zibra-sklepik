@@ -14,86 +14,12 @@
     && navigator.userAgentData.brands.some(b => /Chromium/.test(b.brand)));
   if (isChromium && !reduceMotion) root.classList.add('supports-refract');
 
-  /* ---------- Opening hours (Europe/Warsaw) ---------- */
-  const HOURS = {
-    0: null,          // niedziela
-    1: [5, 19], 2: [5, 19], 3: [5, 19], 4: [5, 19], 5: [5, 19],
-    6: [6, 14],       // sobota
-  };
-  const DAY_NAMES = ['niedzielę', 'poniedziałek', 'wtorek', 'środę', 'czwartek', 'piątek', 'sobotę'];
-  const pad = n => String(n).padStart(2, '0');
-
-  function warsawNow() {
-    const parts = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/Warsaw', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
-    }).formatToParts(new Date());
-    const get = t => parts.find(p => p.type === t).value;
-    const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
-    return { day, minutes: +get('hour') * 60 + +get('minute') };
-  }
-
-  function nextOpening(day, minutes) {
-    for (let i = 0; i < 8; i++) {
-      const d = (day + i) % 7;
-      const h = HOURS[d];
-      if (!h) continue;
-      if (i === 0 && minutes >= h[0] * 60) continue;
-      const when = i === 0 ? 'dziś' : i === 1 ? 'jutro' : `w ${DAY_NAMES[d]}`;
-      return { when, time: `${pad(h[0])}:00` };
-    }
-    return { when: '', time: '' };
-  }
-
-  const ring = document.querySelector('[data-ring]');
-  const ringValue = document.querySelector('[data-ring-value]');
-  const ringCaption = document.querySelector('[data-ring-caption]');
-
-  function updateStatus() {
-    const { day, minutes } = warsawNow();
-    const h = HOURS[day];
-    const open = !!h && minutes >= h[0] * 60 && minutes < h[1] * 60;
-
-    let long, short;
-    if (open) {
-      const left = h[1] * 60 - minutes;
-      long = left <= 60
-        ? `Otwarte teraz · zamykamy za ${left} min`
-        : `Otwarte teraz · do ${pad(h[1])}:00`;
-      short = 'Otwarte';
-    } else {
-      const next = nextOpening(day, minutes);
-      long = `Zamknięte · otwieramy ${next.when} o ${next.time}`;
-      short = 'Zamknięte';
-    }
-
-    if (ring) {
-      let frac = 0;
-      if (open) {
-        const left = h[1] * 60 - minutes;
-        frac = left / ((h[1] - h[0]) * 60);
-        ringValue.textContent = `${Math.floor(left / 60)}:${pad(left % 60)}`;
-        ringCaption.textContent = 'do zamknięcia';
-      } else {
-        const next = nextOpening(day, minutes);
-        ringValue.textContent = next.time;
-        ringCaption.textContent = `otwarcie ${next.when}`;
-      }
-      ring.style.strokeDashoffset = String(100 - frac * 100);
-      ring.closest('.ring').classList.toggle('closed', !open);
-    }
-
-    document.querySelectorAll('[data-status]').forEach(el => {
-      el.classList.toggle('is-open', open);
-      el.classList.toggle('is-closed', !open);
-    });
-    document.querySelectorAll('[data-status-text]').forEach(el => { el.textContent = long; });
-    document.querySelectorAll('[data-status-short]').forEach(el => { el.textContent = short; });
-    document.querySelectorAll('[data-hours] li').forEach(li => {
-      li.classList.toggle('today', +li.dataset.day === day);
-    });
-  }
-  updateStatus();
-  setInterval(updateStatus, 30000);
+  /* ---------- Highlight today in the hours list (Europe/Warsaw) ---------- */
+  const weekday = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Warsaw', weekday: 'short' }).format(new Date());
+  const today = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(weekday);
+  document.querySelectorAll('[data-hours] li').forEach(li => {
+    li.classList.toggle('today', +li.dataset.day === today);
+  });
 
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
@@ -154,8 +80,8 @@
   /* ---------- Word-by-word statement (Apple style) ---------- */
   const statement = document.querySelector('[data-words]');
   if (statement) {
-    const highlight = /^(piątej|rano|kanapkami,)$/i;
-    const highlightOrange = /^(gorącą|kawą)$/i;
+    const highlight = /^(szóstej|rano|kanapkami,)$/i;
+    const highlightOrange = /^(ciastami)$/i;
     const words = statement.textContent.trim().split(/\s+/);
     statement.innerHTML = words
       .map(w => `<span class="w${highlight.test(w) ? ' hl' : highlightOrange.test(w) ? ' hl-o' : ''}">${w.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span>`)
@@ -233,6 +159,22 @@
       if (!zTick) { zTick = true; requestAnimationFrame(() => { setZoom(); zTick = false; }); }
     }, { passive: true });
     window.addEventListener('resize', setZoom);
+  }
+
+  /* ---------- Gallery arrows ---------- */
+  const gallery = document.querySelector('[data-gallery]');
+  if (gallery) {
+    const btns = document.querySelectorAll('[data-gal]');
+    const syncBtns = () => {
+      const max = gallery.scrollWidth - gallery.clientWidth - 4;
+      btns.forEach(b => { b.disabled = +b.dataset.gal < 0 ? gallery.scrollLeft <= 4 : gallery.scrollLeft >= max; });
+    };
+    btns.forEach(b => b.addEventListener('click', () => {
+      gallery.scrollBy({ left: +b.dataset.gal * gallery.clientWidth * 0.75, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }));
+    gallery.addEventListener('scroll', () => requestAnimationFrame(syncBtns), { passive: true });
+    window.addEventListener('resize', syncBtns);
+    syncBtns();
   }
 
   /* ---------- Hero parallax ---------- */

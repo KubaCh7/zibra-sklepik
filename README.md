@@ -8,7 +8,7 @@ Na Vercel wystarczy zaimportować repozytorium (framework: „Other”).
 
 - `index.html` — treść strony
 - `style.css` — wygląd (materiał szkła: klasa `.glass`)
-- `script.js` — status „otwarte/zamknięte” na żywo, animacje przy przewijaniu, menu mobilne
+- `script.js` — animacje przy przewijaniu, galeria, menu mobilne
 - `assets/` — logo i zdjęcia produktów
 
 ## Zmiana aktualnej oferty
