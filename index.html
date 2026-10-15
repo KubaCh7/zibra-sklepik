@@ -1,111 +1,321 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delikatesy Zibra - Wołomin</title>
-    <link rel="icon" href="assets/logo.jpg" type="image/jpg">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Delikatesy Zibra — Wołomin</title>
+  <meta name="description" content="Delikatesy Zibra w Wołominie — świeże kanapki, ciasta, mięsa i wędliny, dania gotowe i napoje. Legionów 50. Otwarte od 5:00.">
+  <meta name="theme-color" content="#f4f8ee">
+  <meta property="og:title" content="Delikatesy Zibra — Wołomin">
+  <meta property="og:description" content="Świeże smaki tuż za rogiem. Legionów 50, Wołomin.">
+  <meta property="og:image" content="assets/logo-dark.webp">
+  <link rel="icon" href="assets/mark.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-bar">
-        <p>🔥 Najlepsze delikatesy w Wołominie - świeże produkty prosto z półki! Sprawdź ofertę i wpadnij już dziś! 🔥</p>
-    </div>
-    <header>
-        <div class="logo">
-            <img src="assets/logo.jpg" alt="Logo Zibra">
-        </div>
-        <h1>Delikatesy Zibra</h1>
-        <p>Witamy w naszym sklepie w Wołominie!</p>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#o-nas">O nas</a></li>
-            <li><a href="#produkty">Produkty</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-        </ul>
+  <!-- Refraction filter used by the liquid-glass surfaces (Chromium) -->
+  <svg class="sr-only" aria-hidden="true" width="0" height="0">
+    <filter id="liquid" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
+      <feGaussianBlur in="noise" stdDeviation="2" result="soft"/>
+      <feDisplacementMap in="SourceGraphic" in2="soft" scale="38" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <!-- Ambient background -->
+  <div class="ambient" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="bubble bb1"></span>
+    <span class="bubble bb2"></span>
+    <span class="bubble bb3"></span>
+    <span class="bubble bb4"></span>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav-wrap">
+    <nav class="nav glass" aria-label="Główna nawigacja">
+      <a href="#top" class="nav-logo" aria-label="Delikatesy Zibra — strona główna">
+        <img src="assets/logo-dark.webp" alt="Delikatesy Zibra" width="1130" height="357">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#o-nas">O nas</a></li>
+        <li><a href="#produkty">Produkty</a></li>
+        <li><a href="#godziny">Godziny</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+      <a href="tel:+48789415213" class="btn btn-lime btn-sm nav-cta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+        Zadzwoń
+      </a>
+      <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
     </nav>
+    <div class="mobile-menu glass" id="mobile-menu" hidden>
+      <a href="#o-nas">O nas</a>
+      <a href="#produkty">Produkty</a>
+      <a href="#godziny">Godziny</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="tel:+48789415213" class="btn btn-lime">Zadzwoń · 789 415 213</a>
+    </div>
+  </header>
 
-    <section id="o-nas">
-        <h2>O nas 🌟</h2>
-        <p>Delikatesy Zibra to lokalny sklep spożywczy w Wołominie, specjalizujący się w wysokiej jakości produktach spożywczych. Oferujemy świeże delikatesy, słodkości 🍰, mięsa 🥩, kanapki 🥪, dania gotowe 🍲 i różnorodne napoje 🥤. Naszym celem jest dostarczanie klientom świeżych i smacznych produktów codziennie.
-        W sklepie znajdziesz też pyszne przekąski na szybko, zdrowe sałatki oraz wyjątkowe produkty regionalne. Dbamy o super atmosferę i ekspresową obsługę, więc każda wizyta jest przyjemnością. Sklep otwarty od poniedziałku do piątku od 5:00 do 19:00, w sobotę od 6:00 do 14:00. Zapraszamy na pyszną kawę ☕ i relaksujący czas w naszym przytulnym miejscu! 😋</p>
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-copy">
+        <a href="#godziny" class="status-pill glass" data-status>
+          <span class="dot"></span>
+          <span data-status-text>Sprawdzam godziny…</span>
+        </a>
+        <h1 class="hero-title">
+          <span class="line">Świeże smaki.</span>
+          <span class="line grad">Tuż za rogiem.</span>
+        </h1>
+        <p class="hero-sub">
+          Delikatesy Zibra w&nbsp;Wołominie. Kanapki, ciasta, wędliny, dania gotowe
+          i&nbsp;gorąca kawa — codziennie od&nbsp;5:00&nbsp;rano.
+        </p>
+        <div class="hero-ctas">
+          <a href="#produkty" class="btn btn-lime">Zobacz ofertę</a>
+          <a href="#kontakt" class="btn btn-glass glass">
+            Jak dojechać
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-stage" aria-hidden="true">
+        <figure class="float-card glass c1" data-parallax="-0.06">
+          <img src="assets/kanapki.webp" alt="" width="1400" height="627">
+          <figcaption>Kanapki</figcaption>
+        </figure>
+        <figure class="float-card glass c2" data-parallax="0.05">
+          <img src="assets/ciasta.webp" alt="" width="1050" height="1400">
+          <figcaption>Ciasta</figcaption>
+        </figure>
+        <figure class="float-card glass c3" data-parallax="-0.1">
+          <img src="assets/miesa.webp" alt="" width="1050" height="1400">
+          <figcaption>Wędliny</figcaption>
+        </figure>
+        <div class="hero-badge glass refract" data-parallax="0.12">
+          <img src="assets/mark.png" alt="" width="256" height="256">
+          <div>
+            <strong>Legionów 50</strong>
+            <span>Wołomin</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#o-nas" class="scroll-hint" aria-label="Przewiń w dół">
+        <span></span>
+      </a>
     </section>
 
-    <section id="produkty">
-        <h2>Nasze produkty</h2>
-        <div class="produkty-grid">
-            <div class="produkt">
-                <img src="assets/ciasta.jpg" alt="Ciasta">
-                <h3>Ciasta 🍰</h3>
-                <p>Świeże ciasta i słodkości na każdą okazję.</p>
-            </div>
-            <div class="produkt">
-                <img src="assets/daniagotowe.jpg" alt="Dania gotowe">
-                <h3>Dania gotowe 🍲</h3>
-                <p>Smaczne dania gotowe do zabrania ze sobą.</p>
-            </div>
-            <div class="produkt">
-                <img src="assets/kanapki.jpg" alt="Kanapki">
-                <h3>Kanapki 🥪</h3>
-                <p>Świeże kanapki przygotowane z najlepszych składników.</p>
-            </div>
-            <div class="produkt">
-                <img src="assets/mięsa.jpg" alt="Mięsa">
-                <h3>Mięsa 🥩</h3>
-                <p>Wysokiej jakości mięsa i wędliny.</p>
-            </div>
-            <div class="produkt">
-                <img src="assets/napoje.webp" alt="Napoje">
-                <h3>Napoje 🥤</h3>
-                <p>Różnorodność napojów dla każdego gustu.</p>
-            </div>
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Kanapki</span><i></i><span>Ciasta</span><i></i><span>Wędliny</span><i></i><span>Dania gotowe</span><i></i><span>Napoje</span><i></i><span>Kawa</span><i></i><span>Sałatki</span><i></i><span>Produkty regionalne</span><i></i>
+        <span>Kanapki</span><i></i><span>Ciasta</span><i></i><span>Wędliny</span><i></i><span>Dania gotowe</span><i></i><span>Napoje</span><i></i><span>Kawa</span><i></i><span>Sałatki</span><i></i><span>Produkty regionalne</span><i></i>
+      </div>
+    </div>
+
+    <!-- About / statement -->
+    <section id="o-nas" class="section statement-section">
+      <p class="eyebrow reveal">O nas</p>
+      <p class="statement" data-words>
+        Jesteśmy lokalnym sklepem z&nbsp;Wołomina. Od piątej rano czekamy na Ciebie ze świeżymi kanapkami,
+        gorącą kawą i&nbsp;wszystkim, czego potrzebujesz na dobry dzień.
+      </p>
+
+      <div class="stats">
+        <div class="stat glass reveal">
+          <span class="stat-num">5:00</span>
+          <span class="stat-label">otwieramy w&nbsp;dni robocze</span>
         </div>
+        <div class="stat glass reveal">
+          <span class="stat-num">6</span>
+          <span class="stat-label">dni w&nbsp;tygodniu dla Ciebie</span>
+        </div>
+        <div class="stat glass reveal">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">świeżości każdego dnia</span>
+        </div>
+      </div>
     </section>
 
-    <section id="kontakt">
-        <h2>Kontakt 📞</h2>
-        <div class="kontakt-info">
-            <div class="kontakt-item adres-item">
-                <h3>🏠 Adres</h3>
-                <p>Legionów 50, Wołomin</p>
-            </div>
-            <div class="kontakt-item telefon-item">
-                <h3>📱 Telefon</h3>
-                <p>789 415 213</p>
-            </div>
-            <div class="kontakt-item godziny godziny-week">
-                <h3>🕒 Poniedziałek–Piątek</h3>
-                <ul>
-                    <li>Godz. 05:00–19:00</li>
-                </ul>
-            </div>
-            <div class="kontakt-item godziny godziny-weekend">
-                <h3>🕒 Weekend</h3>
-                <ul>
-                    <li>Sobota: 06:00–14:00</li>
-                    <li>Niedziela: Zamknięte 😴</li>
-                </ul>
-            </div>
-        </div>
-        <div class="kontakt-extra">
-            <a class="fb-button" href="https://www.facebook.com/profile.php?id=61554725905452" target="_blank">Odwiedź nas na Facebooku</a>
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps?q=Legion%C3%B3w+50+Wo%C5%82omin&output=embed"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
+    <!-- Products bento -->
+    <section id="produkty" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow">Nasze produkty</p>
+        <h2 class="section-title">Wszystko, czego szukasz.<br><span class="muted">Na jednej półce.</span></h2>
+      </div>
+
+      <div class="bento">
+        <article class="tile tall reveal" data-tilt>
+          <img src="assets/ciasta.webp" alt="Ciasta i słodkości w witrynie chłodniczej" loading="lazy" width="1050" height="1400">
+          <div class="tile-cap glass">
+            <h3>Ciasta</h3>
+            <p>Świeże ciasta i&nbsp;słodkości na każdą okazję.</p>
+          </div>
+        </article>
+
+        <article class="tile wide reveal" data-tilt>
+          <img src="assets/kanapki.webp" alt="Świeże kanapki" loading="lazy" width="1400" height="627">
+          <div class="tile-cap glass">
+            <h3>Kanapki</h3>
+            <p>Przygotowane rano z&nbsp;najlepszych składników.</p>
+          </div>
+        </article>
+
+        <article class="tile reveal" data-tilt>
+          <img src="assets/napoje.webp" alt="Półka z napojami" loading="lazy" width="1280" height="845">
+          <div class="tile-cap glass">
+            <h3>Napoje</h3>
+            <p>Coś dla każdego gustu.</p>
+          </div>
+        </article>
+
+        <article class="tile tall reveal" data-tilt>
+          <img src="assets/miesa.webp" alt="Mięsa i wędliny w witrynie" loading="lazy" width="1050" height="1400">
+          <div class="tile-cap glass">
+            <h3>Mięsa i&nbsp;wędliny</h3>
+            <p>Wysoka jakość, prosto z&nbsp;lady.</p>
+          </div>
+        </article>
+
+        <article class="tile wide reveal" data-tilt>
+          <img src="assets/dania.webp" alt="Dania gotowe — pierogi i makarony" loading="lazy" width="1400" height="627">
+          <div class="tile-cap glass">
+            <h3>Dania gotowe</h3>
+            <p>Smaczny obiad do zabrania ze sobą.</p>
+          </div>
+        </article>
+
+        <article class="tile tile-more glass reveal">
+          <div class="more-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>I&nbsp;wiele więcej</h3>
+          <ul class="chips">
+            <li>Kawa na wynos</li>
+            <li>Sałatki</li>
+            <li>Przekąski</li>
+            <li>Produkty regionalne</li>
+            <li>Pieczywo</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
-    <footer>
-        <p>&copy; 2023 Delikatesy Zibra. Wszystkie prawa zastrzeżone.</p>
-        <p>Znajdź nas na <a href="https://www.facebook.com/p/Delikatesy-Zibra-61554725905452" target="_blank">Facebooku</a></p>
-    </footer>
+    <!-- Features -->
+    <section class="section">
+      <div class="features">
+        <div class="feature glass reveal" data-shine>
+          <div class="f-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Wcześnie rano</h3>
+          <p>Otwieramy o&nbsp;5:00, żebyś zdążył po śniadanie przed pracą.</p>
+        </div>
+        <div class="feature glass reveal" data-shine>
+          <div class="f-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-4.5-3-8-6.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 4.5-3.5 8-8 11z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Codziennie świeże</h3>
+          <p>Dostawy każdego dnia — kanapki i&nbsp;ciasta prosto na półkę.</p>
+        </div>
+        <div class="feature glass reveal" data-shine>
+          <div class="f-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Ekspresowa obsługa</h3>
+          <p>Wpadasz, bierzesz, lecisz. Bez kolejek i&nbsp;bez czekania.</p>
+        </div>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Hours + contact -->
+    <section id="godziny" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow">Godziny i kontakt</p>
+        <h2 class="section-title">Wpadnij do nas.<br><span class="muted">Czekamy z&nbsp;kawą.</span></h2>
+      </div>
+
+      <div class="visit">
+        <div class="hours-card glass reveal" data-shine>
+          <div class="hours-head">
+            <h3>Godziny otwarcia</h3>
+            <span class="status-chip" data-status><span class="dot"></span><span data-status-short>—</span></span>
+          </div>
+          <ul class="hours-list" data-hours>
+            <li data-day="1"><span>Poniedziałek</span><span>05:00 – 19:00</span></li>
+            <li data-day="2"><span>Wtorek</span><span>05:00 – 19:00</span></li>
+            <li data-day="3"><span>Środa</span><span>05:00 – 19:00</span></li>
+            <li data-day="4"><span>Czwartek</span><span>05:00 – 19:00</span></li>
+            <li data-day="5"><span>Piątek</span><span>05:00 – 19:00</span></li>
+            <li data-day="6"><span>Sobota</span><span>06:00 – 14:00</span></li>
+            <li data-day="0"><span>Niedziela</span><span class="closed">Zamknięte</span></li>
+          </ul>
+        </div>
+
+        <div id="kontakt" class="contact-card glass reveal" data-shine>
+          <h3>Kontakt</h3>
+          <a class="contact-row" href="https://www.google.com/maps/dir/?api=1&destination=Legion%C3%B3w+50,+05-200+Wo%C5%82omin" target="_blank" rel="noopener">
+            <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <span><small>Adres</small>Legionów 50, Wołomin</span>
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="contact-row" href="tel:+48789415213">
+            <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <span><small>Telefon</small>789 415 213</span>
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="contact-row" href="https://www.facebook.com/profile.php?id=61554725905452" target="_blank" rel="noopener">
+            <span class="c-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <span><small>Facebook</small>Delikatesy Zibra</span>
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="map glass">
+            <iframe
+              title="Mapa — Delikatesy Zibra, Legionów 50, Wołomin"
+              src="https://www.google.com/maps?q=Legion%C3%B3w+50+Wo%C5%82omin&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section cta-section">
+      <div class="cta glass refract-soft reveal" data-shine>
+        <img src="assets/mark.png" alt="" class="cta-mark" width="256" height="256">
+        <h2>Do zobaczenia<br>w&nbsp;Zibrze.</h2>
+        <p>Legionów 50, Wołomin · pon–pt 5–19 · sob 6–14</p>
+        <div class="hero-ctas">
+          <a href="tel:+48789415213" class="btn btn-lime">Zadzwoń teraz</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Legion%C3%B3w+50,+05-200+Wo%C5%82omin" target="_blank" rel="noopener" class="btn btn-glass glass">Wyznacz trasę</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="assets/logo-dark.webp" alt="Delikatesy Zibra" class="footer-logo" width="1130" height="357" loading="lazy">
+    <p>&copy; <span data-year>2025</span> Delikatesy Zibra · Legionów 50, Wołomin</p>
+    <p><a href="https://www.facebook.com/profile.php?id=61554725905452" target="_blank" rel="noopener">Facebook</a> · <a href="tel:+48789415213">789 415 213</a></p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
