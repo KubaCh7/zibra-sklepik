@@ -1,6 +1,11 @@
 (() => {
   const root = document.documentElement;
   root.classList.remove('no-js');
+
+  /* ---------- Always start at the top on load / refresh ---------- */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo(0, 0);
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -34,10 +39,14 @@
       if (!h) continue;
       if (i === 0 && minutes >= h[0] * 60) continue;
       const when = i === 0 ? 'dziś' : i === 1 ? 'jutro' : `w ${DAY_NAMES[d]}`;
-      return `${when} o ${pad(h[0])}:00`;
+      return { when, time: `${pad(h[0])}:00` };
     }
-    return '';
+    return { when: '', time: '' };
   }
+
+  const ring = document.querySelector('[data-ring]');
+  const ringValue = document.querySelector('[data-ring-value]');
+  const ringCaption = document.querySelector('[data-ring-caption]');
 
   function updateStatus() {
     const { day, minutes } = warsawNow();
@@ -52,8 +61,25 @@
         : `Otwarte teraz · do ${pad(h[1])}:00`;
       short = 'Otwarte';
     } else {
-      long = `Zamknięte · otwieramy ${nextOpening(day, minutes)}`;
+      const next = nextOpening(day, minutes);
+      long = `Zamknięte · otwieramy ${next.when} o ${next.time}`;
       short = 'Zamknięte';
+    }
+
+    if (ring) {
+      let frac = 0;
+      if (open) {
+        const left = h[1] * 60 - minutes;
+        frac = left / ((h[1] - h[0]) * 60);
+        ringValue.textContent = `${Math.floor(left / 60)}:${pad(left % 60)}`;
+        ringCaption.textContent = 'do zamknięcia';
+      } else {
+        const next = nextOpening(day, minutes);
+        ringValue.textContent = next.time;
+        ringCaption.textContent = `otwarcie ${next.when}`;
+      }
+      ring.style.strokeDashoffset = String(100 - frac * 100);
+      ring.closest('.ring').classList.toggle('closed', !open);
     }
 
     document.querySelectorAll('[data-status]').forEach(el => {
@@ -152,6 +178,61 @@
       window.addEventListener('scroll', () => requestAnimationFrame(paint), { passive: true });
       window.addEventListener('resize', paint);
     }
+  }
+
+  /* ---------- In-page links: smooth scroll without touching the URL ---------- */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute('href');
+    const target = id === '#top' ? null : document.querySelector(id);
+    if (id !== '#top' && !target) return;
+    e.preventDefault();
+    const y = target ? target.getBoundingClientRect().top + window.scrollY - 90 : 0;
+    window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (a.classList.contains('skip-link')) document.getElementById('top').focus({ preventScroll: true });
+  });
+
+  /* ---------- Count-up numbers ---------- */
+  const counters = [...document.querySelectorAll('.stat-num')]
+    .map(el => ({ el, m: el.textContent.trim().match(/^(\d+)(%?)$/) }))
+    .filter(c => c.m);
+  if (!reduceMotion && counters.length) {
+    counters.forEach(c => { c.el.textContent = `0${c.m[2]}`; });
+    const countIO = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        countIO.unobserve(entry.target);
+        const c = counters.find(x => x.el === entry.target);
+        const end = +c.m[1];
+        const t0 = performance.now();
+        const step = now => {
+          const k = Math.min(1, (now - t0) / 1400);
+          c.el.textContent = `${Math.round(end * (1 - Math.pow(1 - k, 3)))}${c.m[2]}`;
+          if (k < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(c => countIO.observe(c.el));
+  }
+
+  /* ---------- Scroll-expanding photo ---------- */
+  const zoom = document.querySelector('[data-zoom]');
+  if (zoom) {
+    const setZoom = () => {
+      const r = zoom.getBoundingClientRect();
+      const travel = (r.height - window.innerHeight) * 0.7;
+      const p = reduceMotion ? 1 : Math.min(1, Math.max(0, -r.top / travel));
+      zoom.style.setProperty('--p', p.toFixed(3));
+      zoom.style.setProperty('--i', (1 - p).toFixed(3));
+    };
+    setZoom();
+    let zTick = false;
+    window.addEventListener('scroll', () => {
+      if (!zTick) { zTick = true; requestAnimationFrame(() => { setZoom(); zTick = false; }); }
+    }, { passive: true });
+    window.addEventListener('resize', setZoom);
   }
 
   /* ---------- Hero parallax ---------- */

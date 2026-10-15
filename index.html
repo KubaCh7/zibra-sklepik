@@ -99,7 +99,7 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
 
     <!-- Hero -->
     <section class="hero">
@@ -297,6 +297,23 @@
       </div>
     </section>
 
+    <!-- Full-bleed photo that expands on scroll -->
+    <section class="zoom" data-zoom aria-label="Zajrzyj do środka">
+      <div class="zoom-sticky">
+        <div class="zoom-frame">
+          <img src="assets/napoje.webp" alt="Pełne półki z napojami w Delikatesach Zibra" loading="lazy" width="1280" height="845">
+          <div class="zoom-copy">
+            <p class="eyebrow">Zajrzyj do środka</p>
+            <h2>Pełne półki.<br>Każdego dnia.</h2>
+            <p>Napoje, przekąski, słodkości i&nbsp;codzienne zakupy — wszystko pod jednym dachem, kilka kroków od domu.</p>
+          </div>
+        </div>
+        <span class="zoom-hint glass">Przewiń, żeby wejść
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </section>
+
     <!-- Features -->
     <section class="section">
       <div class="features">
@@ -333,9 +350,22 @@
 
       <div class="visit">
         <div class="hours-card glass reveal" data-shine>
-          <div class="hours-head">
-            <h3>Godziny otwarcia</h3>
-            <span class="status-chip" data-status><span class="dot"></span><span data-status-short>—</span></span>
+          <h3>Godziny otwarcia</h3>
+          <div class="today">
+            <div class="ring" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <defs>
+                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b4ec5a"/><stop offset="1" stop-color="#3f9a12"/></linearGradient>
+                </defs>
+                <circle class="ring-track" cx="60" cy="60" r="50"/>
+                <circle class="ring-fill" cx="60" cy="60" r="50" pathLength="100" data-ring/>
+              </svg>
+              <div class="ring-label"><strong data-ring-value>—</strong><span data-ring-caption></span></div>
+            </div>
+            <div class="today-text">
+              <span class="status-chip" data-status><span class="dot"></span><span data-status-short>—</span></span>
+              <p data-status-text>Sprawdzam godziny…</p>
+            </div>
           </div>
           <ul class="hours-list" data-hours>
             <li data-day="1"><span>Poniedziałek</span><span>05:00 – 19:00</span></li>
