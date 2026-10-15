@@ -1132,6 +1132,7 @@ h1, h2, h3, p { margin: 0; }
   will-change: clip-path;
   background: var(--bg-2);
 }
+.zoom-frame picture { display: block; width: 100%; height: 100%; }
 .zoom-frame img {
   width: 100%;
   height: 100%;
@@ -1195,4 +1196,24 @@ h1, h2, h3, p { margin: 0; }
   .ring { width: 96px; height: 96px; }
   .ring-label strong { font-size: 20px; }
   .today { gap: 14px; padding: 12px; }
+}
+
+/* drinks tile (icon instead of photo) */
+.tile-drinks {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  overflow: visible;
+  transform: none;
+  background:
+    radial-gradient(320px 220px at 0% 0%, rgba(170, 225, 110, 0.45), transparent 70%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.75), rgba(232, 246, 220, 0.5));
+}
+.tile-drinks h3 { font-size: 24px; letter-spacing: -0.03em; font-weight: 700; }
+.tile-drinks p { margin-top: 4px; font-size: 15px; color: var(--text-2); }
+.drinks-icon {
+  background: linear-gradient(180deg, var(--green-2), var(--green-deep));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 10px 22px -8px rgba(74, 146, 22, 0.6);
 }
